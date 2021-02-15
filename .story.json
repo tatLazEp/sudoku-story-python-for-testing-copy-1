@@ -1,0 +1,15 @@
+{
+  "title": "Sudoku Refactoring",
+  "readingTime": 40,
+  "authors": [
+    {
+      "name": "Vsevolod Osmachko",
+      "email": "vsevolod_osmachko@epam.com"
+    }
+  ],
+  "description": "This story contains sudoku resolver which has some problems like return codes, comments, DRY and not very small function size",
+  "tags": [
+    "clean_code"
+  ],
+  "program_lang": "python"
+}
