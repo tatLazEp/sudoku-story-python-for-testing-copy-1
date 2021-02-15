@@ -16,27 +16,33 @@ def find_position_to_solve(position_to_fill, sudoku):
                 return True
     return False
 
+def used_in_row(num, row, column, sudoku):
+    for i in range(9):
+        if sudoku[row][i] == num:
+            return True
+    return False
+
+
+def used_in_column(num, row, column, sudoku):
+    for i in range(9):
+        if sudoku[i][column] == num:
+            return True
+    return False
+
+
+def used_in_box(num, row, column, sudoku):
+    for i in range(3):
+        for j in range(3):
+            if sudoku[i + row][j + column] == num:
+                return True
+    return False
+
 
 def is_location_valid(num, row, col, sudoku):
 
-    num_in_row = False
-    num_in_column = False
-    num_in_box = False
-
-    for i in range(9):
-        if sudoku[row][i] == num:
-            num_in_row = True
-
-    for i in range(9):
-        if sudoku[i][col] == num:
-            num_in_column = True
-
-    box_row = row - row % 3
-    box_col = col - col % 3
-    for i in range(3):
-        for j in range(3):
-            if sudoku[i + box_row][j + box_col] == num:
-                num_in_box = True
+    num_in_row = used_in_row(num, row, col, sudoku)
+    num_in_column = used_in_column(num, row, col, sudoku)
+    num_in_box = used_in_box(num, row - row % 3, col - col % 3, sudoku)
 
     if (not num_in_row and not num_in_column and not num_in_box):
         sudoku[row][col] = num
