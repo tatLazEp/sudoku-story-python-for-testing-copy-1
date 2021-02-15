@@ -1,3 +1,6 @@
+class InvalidSudokuException(Exception):
+    pass
+
 def print_sudoku(sudoku):
     print('**********************************')
     for i in sudoku:
@@ -65,10 +68,11 @@ def solve_sudoku(sudoku):
 
 
 def run(sudoku):
-    print('Sudoku Board - initial state')
+    print('Sudoku sudoku - initial state')
     print_sudoku(sudoku)
-    solve_sudoku(sudoku)
-    print('Sudoku Board - Final state')
+    if not solve_sudoku(sudoku):
+        raise InvalidSudokuException('Sudoku is invalid')
+    print('Sudoku sudoku - Final state')
     print_sudoku(sudoku)
     return sudoku
 
