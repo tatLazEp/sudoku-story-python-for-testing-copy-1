@@ -1,3 +1,6 @@
+SUDOKU_DIMENTION = 9
+SUDOKU_BOX_DIMENTION = 3
+
 class InvalidSudokuException(Exception):
     pass
 
@@ -11,8 +14,8 @@ def print_sudoku(sudoku):
 
 
 def find_position_to_solve(position_to_fill, sudoku):
-    for i in range(9):
-        for j in range(9):
+    for i in range(SUDOKU_DIMENTION):
+        for j in range(SUDOKU_DIMENTION):
             if sudoku[i][j] == 0:
                 position_to_fill[0] = i
                 position_to_fill[1] = j
@@ -21,22 +24,22 @@ def find_position_to_solve(position_to_fill, sudoku):
 
 
 def used_in_row(num, row, column, sudoku):
-    for i in range(9):
+    for i in range(SUDOKU_DIMENTION):
         if sudoku[row][i] == num:
             return True
     return False
 
 
 def used_in_column(num, row, column, sudoku):
-    for i in range(9):
+    for i in range(SUDOKU_DIMENTION):
         if sudoku[i][column] == num:
             return True
     return False
 
 
 def used_in_box(num, row, column, sudoku):
-    for i in range(3):
-        for j in range(3):
+    for i in range(SUDOKU_BOX_DIMENTION):
+        for j in range(SUDOKU_BOX_DIMENTION):
             if sudoku[i + row][j + column] == num:
                 return True
     return False
@@ -78,5 +81,5 @@ def run(sudoku):
 
 
 if __name__ == "__main__":
-    sudoku = [[0 for j in range(9)] for i in range(9)]
+    sudoku = [[0 for j in range(SUDOKU_DIMENTION)] for i in range(SUDOKU_DIMENTION)]
     run(sudoku)
