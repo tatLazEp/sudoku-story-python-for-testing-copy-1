@@ -1,5 +1,5 @@
-SUDOKU_DIMENTION = 9
-SUDOKU_BOX_DIMENTION = 3
+SUDOKU_DIMENTION = 4
+SUDOKU_BOX_DIMENTION = 2
 
 
 class InvalidSudokuException(Exception):
