@@ -49,14 +49,7 @@ def is_location_valid(num, row, col, sudoku):
     return not used_in_row(num, row, col, sudoku) and not used_in_column(num, row, col, sudoku) and not used_in_box(num, row - row % SUDOKU_BOX_DIMENTION, col - col % SUDOKU_BOX_DIMENTION, sudoku)
 
 
-def solve_sudoku(sudoku):
-    found = find_position_to_solve(sudoku)
-    if not found:
-        print('All cells filled, exiting...')
-        return True
-    else:
-        row, col = found
-
+def solve_cell(row, col, sudoku):
     for i in range(1, SUDOKU_DIMENTION + 1):
         if is_location_valid(i, row, col, sudoku):
             sudoku[row][col] = i
@@ -64,9 +57,18 @@ def solve_sudoku(sudoku):
             if solve_sudoku(sudoku):
                 return True
 
-            # Backtrack
             sudoku[row][col] = 0
     return False
+
+
+def solve_sudoku(sudoku):
+    found = find_position_to_solve(sudoku)
+    if not found:
+        print('All cells filled, exiting...')
+        return True
+    else:
+        row, col = found
+    return solve_cell(row, col, sudoku)
 
 
 def run(sudoku):
