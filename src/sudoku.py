@@ -1,5 +1,5 @@
-SUDOKU_DIMENTION = 4
-SUDOKU_BOX_DIMENTION = 2
+SUDOKU_DIMENTION = 9
+SUDOKU_BOX_DIMENTION = 3
 
 
 class InvalidSudokuException(Exception):
@@ -15,14 +15,12 @@ def print_sudoku(sudoku):
     print('**********************************')
 
 
-def find_position_to_solve(position_to_fill, sudoku):
+def find_position_to_solve(sudoku):
     for i in range(SUDOKU_DIMENTION):
         for j in range(SUDOKU_DIMENTION):
             if sudoku[i][j] == 0:
-                position_to_fill[0] = i
-                position_to_fill[1] = j
-                return True
-    return False
+                return (i, j)
+    return None
 
 
 def used_in_row(num, row, column, sudoku):
@@ -52,14 +50,12 @@ def is_location_valid(num, row, col, sudoku):
 
 
 def solve_sudoku(sudoku):
-    position_to_fill = [0, 0]
-
-    if not find_position_to_solve(position_to_fill, sudoku):
+    found = find_position_to_solve(sudoku)
+    if not found:
         print('All cells filled, exiting...')
         return True
-
-    row = position_to_fill[0]
-    col = position_to_fill[1]
+    else:
+        row, col = found
 
     for i in range(1, SUDOKU_DIMENTION + 1):
         if is_location_valid(i, row, col, sudoku):
@@ -67,8 +63,9 @@ def solve_sudoku(sudoku):
 
             if solve_sudoku(sudoku):
                 return True
-            sudoku[row][col] = 0
 
+            # Backtrack
+            sudoku[row][col] = 0
     return False
 
 
